@@ -53,7 +53,19 @@ public class PlayerOcean : MonoBehaviour
 
         meshFilter = gameObject.AddComponent<MeshFilter>();
         meshFilter.mesh = mesh;
+        
+        Vector3 centre = mesh.bounds.center;
+        Debug.Log("Mesh centre: " + centre);
+        Debug.Log("Boat centre: " + gameObject.transform.parent.position);
 
+        //amend local position to centre the mesh on the boat.
+        transform.localPosition = -centre;
+        transform.localRotation = Quaternion.identity;
+        mesh.RecalculateBounds();
+
+
+        //lock rotation and position of the water plane
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
     }
 
@@ -135,5 +147,9 @@ public class PlayerOcean : MonoBehaviour
         }
         mesh.vertices = verts;
         mesh.RecalculateNormals();
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
+
+    //methods to attain normals and height at a given position, for use in the boat script, so can apply appropriate forces to the boat based on the wave movement.
+    
 }
