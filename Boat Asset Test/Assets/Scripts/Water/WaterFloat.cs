@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// manages the buoyancy of objects by tracking the positions of the floats to the simulated ocean layer. 
+/// </summary>
 public class WaterFloat : MonoBehaviour
 {
 
     public float airDrag = 1;
-    public float waterDrag = 10;
+    public float waterDrag = 2;
     public Transform[] floatPoints;
 
     protected Rigidbody rb;
@@ -76,7 +79,8 @@ public class WaterFloat : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //apply very small upward force to the boat, to simulate buoyancy, and prevent it from sinking through the water when the player gets out of the boat, or when the boat is stationary for a long time, as the physics engine may not apply enough force to keep it afloat.
+        //apply very small upward force to the boat countering the amplitude of the waves, to prevent the boat from sinking when it should be floating on the water. this is done by calculating the average height of the water at the float points, and applying a force proportional to the difference between the boat's current height and the average water height. also apply additional forces at each float point based on how far underwater they are, to simulate buoyancy more accurately and create a more realistic interaction between the boat and the waves.
+        //need to take into account the wave details so the boat doesnt sink. 
         bool anyUnderwater = false;
         float totalWaterY = 0f;
 
@@ -90,8 +94,8 @@ public class WaterFloat : MonoBehaviour
             {
                 anyUnderwater = true;
 
-                float force = displacement * 10f; // buoyancy force proportional to displacement
-                rb.AddForceAtPosition(Vector3.up * force, floatPoints[i].position);
+                float force = displacement * 50f; // buoyancy force proportional to displacement
+                rb.AddForceAtPosition(Vector3.up * force, floatPoints[i].position, ForceMode.Force);
             }
             totalWaterY += waterY;
 
@@ -99,9 +103,11 @@ public class WaterFloat : MonoBehaviour
         }
 
         float averageWaterY = totalWaterY / floatPoints.Length;
-        Vector3 targetPos = rb.position;
-        targetPos.y = Mathf.Lerp(rb.position.y,averageWaterY - centreOffset.y, Time.fixedDeltaTime * 2f);
-        rb.MovePosition(targetPos);
+        float verticalDisplacement = averageWaterY - (rb.position.y + centreOffset.y);
+        //Vector3 targetPos = rb.position;
+        //targetPos.y = Mathf.Lerp(rb.position.y,averageWaterY - centreOffset.y, Time.fixedDeltaTime * 2f);
+        //rb.MovePosition(targetPos);
+        rb.AddForce(Vector3.up * verticalDisplacement * 20f, ForceMode.Force);
 
         rb.drag = anyUnderwater ? waterDrag : airDrag;
         rb.angularDrag = anyUnderwater ? waterDrag : airDrag;

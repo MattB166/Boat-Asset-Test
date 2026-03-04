@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// Manages the movement of the ocean surface. This is done by creating a mesh and manipulating the vertices to create waves. The waves are created using a combination of sine waves, which are defined by the octaves array. Each octave has a scale, frequency, speed, and height, which are used to calculate the y position of each vertex. The UVs are also generated to create a tiling effect on the water texture.
+/// generates a dynamic floor simulating as the ocean, for the player boat to interact with and float on. 
 /// </summary>
 public class PlayerOcean : MonoBehaviour
 {

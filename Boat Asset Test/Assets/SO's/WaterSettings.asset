@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbc9e7f3ef427e44bbba8aa7675184d, type: 3}
   m_Name: WaterSettings
   m_EditorClassIdentifier: 
-  amplitude: 0.57
-  frequency: 1.47
-  speed: 1.06
+  amplitude: 0.6
+  frequency: 0.6
+  speed: 0.78
