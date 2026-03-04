@@ -59,14 +59,12 @@ public class PlayerOcean : MonoBehaviour
         Debug.Log("Boat centre: " + gameObject.transform.parent.position);
 
         //amend local position to centre the mesh on the boat.
-        transform.localPosition = -centre;
-        transform.localRotation = Quaternion.identity;
+        
         mesh.RecalculateBounds();
 
 
         //lock rotation and position of the water plane
         transform.rotation = Quaternion.Euler(0, 0, 0);
-
     }
 
 
@@ -148,8 +146,40 @@ public class PlayerOcean : MonoBehaviour
         mesh.vertices = verts;
         mesh.RecalculateNormals();
         transform.rotation = Quaternion.Euler(0, 0, 0);
+
+       
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 0;
+        transform.position = pos;
     }
 
     //methods to attain normals and height at a given position, for use in the boat script, so can apply appropriate forces to the boat based on the wave movement.
-    
+    public float GetHeight(Vector3 localPos)
+    {
+        float y = 0f;
+        for (int o = 0; o < octaves.Length; o++)
+        {
+            Octave octave = octaves[o];
+            float phase = (localPos.x * octave.frequency.x) - (Time.time * octave.speed.x);
+            y += MathF.Sin(phase) * octave.height;
+
+        }
+        return y;
+    }
+
+    public Vector3 GetNormal(Vector3 localPos)
+    {
+        float delta = 0.01f; // small offset for numerical derivative
+        float hL = GetHeight(localPos - new Vector3(delta, 0, 0));
+        float hR = GetHeight(localPos + new Vector3(delta, 0, 0));
+        float hD = GetHeight(localPos - new Vector3(0, 0, delta));
+        float hU = GetHeight(localPos + new Vector3(0, 0, delta));
+
+        Vector3 normal = new Vector3(hL - hR, 2 * delta, hD - hU);
+        return normal.normalized;
+    }
 }

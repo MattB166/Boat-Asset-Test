@@ -11,4 +11,6 @@ public class WaterSettings : ScriptableObject
     public float amplitude;
     public float frequency;
     public float speed;
+
 }
+
