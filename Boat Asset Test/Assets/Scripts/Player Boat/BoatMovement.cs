@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class BoatMovement : MonoBehaviour
     public float steerSensitivity;
     public float turnStrength;
     private float currentRudderAngle;
+
+   
 
     private Collider boatCollider;
 
@@ -59,6 +62,7 @@ public class BoatMovement : MonoBehaviour
     void Start()
     {
         throttle = 0f;
+        
     }
 
     // Update is called once per frame
@@ -177,7 +181,7 @@ public class BoatMovement : MonoBehaviour
 
     public void Steer()
     {
-        if(rb.velocity.magnitude < minSteerSpeed)
+        if (rb.velocity.magnitude < minSteerSpeed)
         {
             return; 
         }
@@ -192,10 +196,6 @@ public class BoatMovement : MonoBehaviour
             
             float turnTorque = currentRudderAngle * turnStrength * (1f - speed01);
             rb.AddTorque(transform.up * turnTorque, ForceMode.Acceleration);
-
-
-
-
         }
     }
 
