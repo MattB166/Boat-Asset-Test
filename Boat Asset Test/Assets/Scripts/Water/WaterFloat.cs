@@ -8,8 +8,9 @@ using UnityEngine;
 public class WaterFloat : MonoBehaviour
 {
 
-    public float airDrag = 0.02f;
-    public float waterDrag = 0.15f;
+    public float airDrag;
+    public float waterDrag;
+    public float buoyancyForce;
     public Transform[] floatPoints;
 
 
@@ -49,22 +50,7 @@ public class WaterFloat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < floatPoints.Length; i++)
-        {
-            Vector3 localPos = ocean.transform.InverseTransformPoint(floatPoints[i].position);
-            waterlinePoints[i] = floatPoints[i].position;
-            waterlinePoints[i].y = ocean.transform.position.y + ocean.GetHeight(localPos);
-            //check if the point is underwater, and apply forces accordingly inside fixed update, to ensure the physics engine is applying the forces at the correct time, and not missing any frames where the point may be underwater.
-            if (floatPoints[i].position.y < waterlinePoints[i].y)
-            {
-                //Debug.Log("Point " + i + " is underwater");
-            }
-            else
-            {
-                //Debug.Log("Point " + i + " is above water");
-            }
-
-        }
+       
     }
 
     public Vector3 GetCentre(Vector3[] points)
@@ -88,6 +74,8 @@ public class WaterFloat : MonoBehaviour
         for (int i = 0; i < floatPoints.Length; i++)
         {
             Vector3 localPos = ocean.transform.InverseTransformPoint(floatPoints[i].position);
+            waterlinePoints[i] = floatPoints[i].position;
+            waterlinePoints[i].y = ocean.transform.position.y + ocean.GetHeight(localPos);
             float waterY = ocean.transform.position.y + ocean.GetHeight(localPos);
 
             float displacement = waterY - floatPoints[i].position.y;
@@ -95,7 +83,7 @@ public class WaterFloat : MonoBehaviour
             {
                 anyUnderwater = true;
 
-                float force = displacement * 30f; // buoyancy force proportional to displacement
+                float force = displacement * buoyancyForce; // buoyancy force proportional to displacement
                 rb.AddForceAtPosition(Vector3.up * force, floatPoints[i].position, ForceMode.Force);
             }
             totalWaterY += waterY;
@@ -108,7 +96,7 @@ public class WaterFloat : MonoBehaviour
         //Vector3 targetPos = rb.position;
         //targetPos.y = Mathf.Lerp(rb.position.y,averageWaterY - centreOffset.y, Time.fixedDeltaTime * 2f);
         //rb.MovePosition(targetPos);
-        rb.AddForce(Vector3.up * verticalDisplacement * 20f, ForceMode.Force);
+        rb.AddForce(Vector3.up * verticalDisplacement * buoyancyForce, ForceMode.Force);
 
         rb.drag = anyUnderwater ? waterDrag : airDrag;
         rb.angularDrag = anyUnderwater ? waterDrag : airDrag;

@@ -69,7 +69,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4130710765900635668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.093, y: 0.5, z: 3.533}
+  m_LocalPosition: {x: -1.093, y: 0.25, z: 3.533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4273555074096408920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.093, y: 0, z: -3.595}
+  m_LocalPosition: {x: -1.093, y: -0.3, z: -3.595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4381781821083669572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.093, y: 0.5, z: 3.533}
+  m_LocalPosition: {x: 1.093, y: 0.25, z: 3.533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734404647494620797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.093, y: 0, z: -3.595}
+  m_LocalPosition: {x: 1.093, y: -0.3, z: -3.595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   airDrag: 1
   waterDrag: 10
+  buoyancyForce: 0
   floatPoints:
   - {fileID: 4643828686035070644}
   - {fileID: 1066494345587944343}
@@ -323,7 +324,13 @@ MonoBehaviour:
   accelerating: 0
   steering: 0
   motor: {fileID: 0}
-  speed: 0
+  maxSpeed: 0
+  speedAccelerationRate: 0
+  maxEngineForce: 0
+  minSteerSpeed: 0
+  maxSteerAngle: 0
+  steerSensitivity: 0
+  turnStrength: 0
 --- !u!1 &7168334740959172204
 GameObject:
   m_ObjectHideFlags: 0
