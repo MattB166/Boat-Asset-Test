@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 29097010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.5, y: 0, z: -6}
-  m_LocalScale: {x: 25, y: 1, z: 25}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -287,7 +287,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 400
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -366,9 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec585b0cb4d9d0e46af3009e0590a811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carTransform: {fileID: 1158298678}
-  smoothSpeed: 2.5
-  offset: {x: 0, y: 6, z: -15}
+  target: {fileID: 1158298678}
+  smoothSpeed: 10
+  smoothRotate: 3
+  offset: {x: 0, y: 6, z: -17.85}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1918033891, guid: a0488827b2c779d47887ffa6ffc43bbf, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1918033891, guid: a0488827b2c779d47887ffa6ffc43bbf, type: 3}
       propertyPath: m_UseGravity
@@ -872,6 +873,21 @@ PrefabInstance:
       objectReference: {fileID: 598755568}
     - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
+        type: 3}
+      propertyPath: maxSpeedMS
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
+        type: 3}
       propertyPath: steerPower
       value: 2000
       objectReference: {fileID: 0}
@@ -879,6 +895,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enginePower
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
+        type: 3}
+      propertyPath: maxEngineForce
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750735255857285590, guid: a0488827b2c779d47887ffa6ffc43bbf,
+        type: 3}
+      propertyPath: accelerationRate
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416029, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
@@ -893,37 +919,37 @@ PrefabInstance:
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.78
+      value: 16.540405
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.001283668
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6597476
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7514873
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
@@ -933,7 +959,7 @@ PrefabInstance:
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -97.439
       objectReference: {fileID: 0}
     - target: {fileID: 7168334740312416030, guid: a0488827b2c779d47887ffa6ffc43bbf,
         type: 3}

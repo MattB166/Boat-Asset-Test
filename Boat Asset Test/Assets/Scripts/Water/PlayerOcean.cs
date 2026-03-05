@@ -55,8 +55,8 @@ public class PlayerOcean : MonoBehaviour
         meshFilter.mesh = mesh;
         
         Vector3 centre = mesh.bounds.center;
-        Debug.Log("Mesh centre: " + centre);
-        Debug.Log("Boat centre: " + gameObject.transform.parent.position);
+        //Debug.Log("Mesh centre: " + centre);
+        //Debug.Log("Boat centre: " + gameObject.transform.parent.position);
 
         //amend local position to centre the mesh on the boat.
         

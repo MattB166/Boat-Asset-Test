@@ -26,13 +26,13 @@ public class raycasttest : MonoBehaviour
 
         if (Physics.Raycast(transform.position, -transform.up, out hitInfo, Mathf.Infinity, layerMask))
         {
-            Debug.Log("hit water");
+            //Debug.Log("hit water");
             outRay = new Ray(transform.position, -transform.up);
         }
 
         Vector3 start = hitInfo.point;
         Vector3 end = start + hitInfo.normal * normalLength;
-        Debug.Log("angle is : " + Vector3.Angle(start,end));
+        //Debug.Log("angle is : " + Vector3.Angle(start,end));
     }
 
     private void OnDrawGizmos()

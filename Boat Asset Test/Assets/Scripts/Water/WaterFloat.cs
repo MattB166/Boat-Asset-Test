@@ -8,9 +8,10 @@ using UnityEngine;
 public class WaterFloat : MonoBehaviour
 {
 
-    public float airDrag = 1;
-    public float waterDrag = 2;
+    public float airDrag = 0.02f;
+    public float waterDrag = 0.15f;
     public Transform[] floatPoints;
+
 
     protected Rigidbody rb;
 
@@ -56,11 +57,11 @@ public class WaterFloat : MonoBehaviour
             //check if the point is underwater, and apply forces accordingly inside fixed update, to ensure the physics engine is applying the forces at the correct time, and not missing any frames where the point may be underwater.
             if (floatPoints[i].position.y < waterlinePoints[i].y)
             {
-                Debug.Log("Point " + i + " is underwater");
+                //Debug.Log("Point " + i + " is underwater");
             }
             else
             {
-                Debug.Log("Point " + i + " is above water");
+                //Debug.Log("Point " + i + " is above water");
             }
 
         }
@@ -94,7 +95,7 @@ public class WaterFloat : MonoBehaviour
             {
                 anyUnderwater = true;
 
-                float force = displacement * 50f; // buoyancy force proportional to displacement
+                float force = displacement * 30f; // buoyancy force proportional to displacement
                 rb.AddForceAtPosition(Vector3.up * force, floatPoints[i].position, ForceMode.Force);
             }
             totalWaterY += waterY;
