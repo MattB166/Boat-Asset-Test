@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 1158298679}
   - component: {fileID: 1158298680}
   - component: {fileID: 5750735255857285590}
+  - component: {fileID: 3957171782604904748}
   m_Layer: 0
   m_Name: Player Boat
   m_TagString: Untagged
@@ -331,6 +332,19 @@ MonoBehaviour:
   maxSteerAngle: 0
   steerSensitivity: 0
   turnStrength: 0
+--- !u!65 &3957171782604904748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168334740312416029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7168334740959172204
 GameObject:
   m_ObjectHideFlags: 0

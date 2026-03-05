@@ -66,8 +66,6 @@ public class WaterFloat : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //apply very small upward force to the boat countering the amplitude of the waves, to prevent the boat from sinking when it should be floating on the water. this is done by calculating the average height of the water at the float points, and applying a force proportional to the difference between the boat's current height and the average water height. also apply additional forces at each float point based on how far underwater they are, to simulate buoyancy more accurately and create a more realistic interaction between the boat and the waves.
-        //need to take into account the wave details so the boat doesnt sink. 
         bool anyUnderwater = false;
         float totalWaterY = 0f;
 
@@ -83,7 +81,7 @@ public class WaterFloat : MonoBehaviour
             {
                 anyUnderwater = true;
 
-                float force = displacement * buoyancyForce; // buoyancy force proportional to displacement
+                float force = displacement * buoyancyForce; 
                 rb.AddForceAtPosition(Vector3.up * force, floatPoints[i].position, ForceMode.Force);
             }
             totalWaterY += waterY;
@@ -93,9 +91,7 @@ public class WaterFloat : MonoBehaviour
 
         float averageWaterY = totalWaterY / floatPoints.Length;
         float verticalDisplacement = averageWaterY - (rb.position.y + centreOffset.y);
-        //Vector3 targetPos = rb.position;
-        //targetPos.y = Mathf.Lerp(rb.position.y,averageWaterY - centreOffset.y, Time.fixedDeltaTime * 2f);
-        //rb.MovePosition(targetPos);
+        
         rb.AddForce(Vector3.up * verticalDisplacement * buoyancyForce, ForceMode.Force);
 
         rb.drag = anyUnderwater ? waterDrag : airDrag;
