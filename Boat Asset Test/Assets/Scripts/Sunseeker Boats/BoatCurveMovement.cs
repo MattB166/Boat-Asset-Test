@@ -15,6 +15,8 @@ public class BoatCurveMovement : MonoBehaviour
     public float speed;
     private float t;
     private Rigidbody rb;
+    public float closeEnoughDistance = 1f; 
+    private bool shipShouldMove = true;
 
     //seems online I need two control points, and a start and end point. https://stackoverflow.com/questions/4034013/how-to-calculate-a-bezier-curve-with-only-start-and-end-points
     // Start is called before the first frame update
@@ -31,22 +33,7 @@ public class BoatCurveMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        t += Time.fixedDeltaTime * speed;
-        t = Mathf.Clamp01(t);
-
-        
-        Vector3 nextPoint = GetNextPointOnCurve(t, startPoint.position, controlPoint.position, endPoint.position);
-        
-       rb.MovePosition(nextPoint);
-
-        //Vector3 direction = - (nextPoint - transform.position);
-        //if(direction != Vector3.zero)
-        //{
-        //    float newRot = Quaternion.LookRotation(direction).eulerAngles.y;
-        //    Quaternion newRotation = Quaternion.Euler(transform.rotation.x, Mathf.Lerp(transform.rotation.eulerAngles.y,newRot,Time.fixedDeltaTime * 0.5f), transform.rotation.z);
-        //    rb.MoveRotation(newRotation);
-        //}
-        
+        MoveShip();
     }
 
 
@@ -69,5 +56,50 @@ public class BoatCurveMovement : MonoBehaviour
             Gizmos.DrawLine(prevPoint, nextPoint);
             prevPoint = nextPoint;
         }
+    }
+
+    public void MoveShip()
+    {
+        if (shipShouldMove) 
+        {
+            float distanceToEndPoint = Vector3.Distance(transform.position, endPoint.position);
+            
+            if (distanceToEndPoint > closeEnoughDistance)
+            {
+                
+                t += Time.deltaTime * speed;
+                t = Mathf.Clamp01(t);
+                Vector3 nextPoint = GetNextPointOnCurve(t, startPoint.position, controlPoint.position, endPoint.position);
+                rb.MovePosition(nextPoint); ////need to find a way i can use rb.addforce to make it more physics based and realistic. 
+
+                Vector3 futurePoint = GetNextPointOnCurve(t + 0.01f, startPoint.position, controlPoint.position, endPoint.position);
+                Vector3 direction = -(futurePoint - nextPoint).normalized;
+                if (direction != Vector3.zero)
+                {
+                    float targetY = Quaternion.LookRotation(direction).eulerAngles.y;
+                    Quaternion newRot = Quaternion.Euler(
+                        transform.rotation.eulerAngles.x,
+                        Mathf.LerpAngle(transform.rotation.eulerAngles.y, targetY, Time.deltaTime * 5f),
+                        transform.rotation.eulerAngles.z);
+                    rb.MoveRotation(newRot);
+                }
+
+            }
+            else
+            {
+                
+                shipShouldMove = false;
+
+
+            }
+
+        }
+        else
+        {
+
+
+        }
+
+
     }
 }

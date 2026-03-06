@@ -1860,7 +1860,8 @@ MonoBehaviour:
   startPoint: {fileID: 28412738}
   endPoint: {fileID: 1306184693}
   controlPoint: {fileID: 1113057725}
-  speed: 0.05
+  speed: 50
+  closeEnoughDistance: 10
 --- !u!1001 &7168334742154838268
 PrefabInstance:
   m_ObjectHideFlags: 0
