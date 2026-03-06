@@ -48,6 +48,6 @@ public class IslandDocking : MonoBehaviour
     public void OnCompletion()
     {
         transform.GetComponent<Collider>().enabled = false;
-        SceneManager.LoadScene("Asset Test Scene");  ///in a temp place until UI has been set up. 
+        //SceneManager.LoadScene("Asset Test Scene");  ///in a temp place until UI has been set up. 
     }
 }
