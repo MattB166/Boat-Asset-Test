@@ -29,7 +29,7 @@ public class BoatMovement : MonoBehaviour
     public float turnStrength;
     private float currentRudderAngle;
 
-   
+    public Transform startPos;
 
     private Collider boatCollider;
 
@@ -45,6 +45,11 @@ public class BoatMovement : MonoBehaviour
         steerAction = inputActions.FindAction("Steer");
 
         boatCollider = GetComponent<Collider>();
+
+        if(startPos != null)
+            transform.position = startPos.position;
+        
+       
 
     }
     private void OnEnable()

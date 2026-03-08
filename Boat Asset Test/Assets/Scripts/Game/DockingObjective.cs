@@ -52,10 +52,10 @@ public class DockingObjective : MonoBehaviour
             Debug.Log("Docking complete!");
             if(onDockingComplete != null)
                 isObjectiveActive = false;
-            onDockingComplete.Announce(this,objectiveTimer);
+            
             isDockingComplete = true;
             isDocking = false;
-            objectiveTimer = 0;
+            
             StartCoroutine(EndOfAttempt());
         }
     }
@@ -93,6 +93,11 @@ public class DockingObjective : MonoBehaviour
     private IEnumerator EndOfAttempt()
     {
         yield return new WaitForSeconds(timeToWaitAfterCompletion);
-        SceneManager.LoadScene("Asset Test Scene");
+        //show panel now. 
+        //send an event for end of objective. 
+        Debug.Log("Announcing docking complete.");
+        onDockingComplete.Announce(this, objectiveTimer);
+        objectiveTimer = 0;
+        
     }
 }

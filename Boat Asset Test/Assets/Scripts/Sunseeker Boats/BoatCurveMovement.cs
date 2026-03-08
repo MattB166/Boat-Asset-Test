@@ -68,7 +68,7 @@ public class BoatCurveMovement : MonoBehaviour
             {
                 
                 t += Time.deltaTime * speed;
-                t = Mathf.Clamp01(t);
+                t = Mathf.Clamp(t,0,100);
                 Vector3 nextPoint = GetNextPointOnCurve(t, startPoint.position, controlPoint.position, endPoint.position);
                 rb.MovePosition(nextPoint); ////need to find a way i can use rb.addforce to make it more physics based and realistic. 
 
