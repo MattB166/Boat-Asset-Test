@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class IslandDocking : MonoBehaviour
 {
-    private Collider _dockingCollider;
+    private Collider dockingCollider;
     public GameEvent onBoatEntered;
     public GameEvent onBoatExited;
-    private GameObject _dockingZoneIndicator;
+    private GameObject dockingZoneIndicator;
 
     // Start is called before the first frame update
     void Start()
     {
-        _dockingZoneIndicator = transform.GetComponentInChildren<EndZonePulse>().gameObject;
-        _dockingCollider = GetComponent<Collider>();
-        _dockingCollider.isTrigger = true; 
-        if (_dockingCollider == null)
+        dockingZoneIndicator = transform.GetComponentInChildren<EndZonePulse>().gameObject;
+        dockingCollider = GetComponent<Collider>();
+        dockingCollider.isTrigger = true; 
+        if (dockingCollider == null)
         {
             Debug.LogError("No collider found on IslandDocking object.");
         }
@@ -35,7 +35,7 @@ public class IslandDocking : MonoBehaviour
             Debug.Log("Boat entered docking area.");
             if(onBoatEntered != null)
                 onBoatEntered.Announce(this);
-            _dockingZoneIndicator.gameObject.SetActive(false);
+            dockingZoneIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -45,13 +45,13 @@ public class IslandDocking : MonoBehaviour
             Debug.Log("Boat exited docking area.");
             if(onBoatExited != null)
                 onBoatExited.Announce(this);
-                _dockingZoneIndicator.gameObject.SetActive(true);
+                dockingZoneIndicator.gameObject.SetActive(true);
         }
     }
 
     public void OnCompletion()
     {
         transform.GetComponent<Collider>().enabled = false;
-        //SceneManager.LoadScene("Asset Test Scene");  ///in a temp place until UI has been set up. 
+        
     }
 }

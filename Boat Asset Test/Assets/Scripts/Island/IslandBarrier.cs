@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class IslandBarrier : MonoBehaviour
 {
-    private Collider _collider;
+    private Collider collider;
     public float redirectForce;
     private void Awake()
     {
-        _collider = GetComponent<Collider>();
+        collider = GetComponent<Collider>();
     }
 
 

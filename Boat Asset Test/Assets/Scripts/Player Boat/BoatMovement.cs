@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,9 +46,9 @@ public class BoatMovement : MonoBehaviour
         boatCollider = GetComponent<Collider>();
 
         if(startPos != null)
-            transform.position = startPos.position;
-        
-       
+            InitialisePlayer();
+
+
 
     }
     private void OnEnable()
@@ -75,6 +74,15 @@ public class BoatMovement : MonoBehaviour
     {
         
         
+    }
+
+    public void InitialisePlayer()
+    {
+        transform.position = startPos.position;
+        transform.rotation = startPos.rotation;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+            
     }
 
     private void FixedUpdate()
@@ -186,21 +194,25 @@ public class BoatMovement : MonoBehaviour
 
     public void Steer()
     {
-        if (rb.velocity.magnitude < minSteerSpeed)
+            float speed = rb.velocity.magnitude;
+        Debug.Log("Current speed: " + speed);
+        if (speed < minSteerSpeed)
         {
+            rb.angularVelocity = Vector3.zero;
             return; 
         }
         if (steering)
         {
             float steerInput = input.x;
-            float speed = rb.velocity.magnitude;
             float speed01 = Mathf.Clamp01(speed / maxSpeed);
             
             currentRudderAngle = Mathf.Lerp(currentRudderAngle, steerInput * maxSteerAngle, Time.fixedDeltaTime * steerSensitivity);
 
-            
-            float turnTorque = currentRudderAngle * turnStrength * (1f - speed01);
-            rb.AddTorque(transform.up * turnTorque, ForceMode.Acceleration);
+
+            float steeringMultiplier = Mathf.Lerp(1f, 0.5f, speed01);
+
+            float turnTorque = currentRudderAngle * turnStrength * steeringMultiplier;
+            rb.AddRelativeTorque(Vector3.up * turnTorque, ForceMode.Acceleration);
 
         }
     }
@@ -210,7 +222,7 @@ public class BoatMovement : MonoBehaviour
         if(collision.collider.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Boat collided with obstacle.");
-            transform.position = startPos.position;
+            InitialisePlayer();
         }
     }
 

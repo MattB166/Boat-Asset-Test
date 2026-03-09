@@ -158,22 +158,22 @@ PrefabInstance:
     - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
       propertyPath: m_Size.x
-      value: 10.565288
+      value: 4.7794914
       objectReference: {fileID: 0}
     - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
       propertyPath: m_Size.z
-      value: 23.902588
+      value: 15.474406
       objectReference: {fileID: 0}
     - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
       propertyPath: m_Center.x
-      value: 0.01878786
+      value: 0.08565438
       objectReference: {fileID: 0}
     - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
       propertyPath: m_Center.z
-      value: 0.55490446
+      value: 0.4050622
       objectReference: {fileID: 0}
     - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
@@ -258,7 +258,7 @@ MonoBehaviour:
   startPoint: {fileID: 7824925430210819917}
   endPoint: {fileID: 7824925429206726650}
   controlPoint: {fileID: 7824925429147669938}
-  speed: 0.01
+  speed: 0.015
   closeEnoughDistance: 10
 --- !u!4 &4980683241605628084 stripped
 Transform:

@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviour
 
     public GameEvent onAttemptComplete;
 
-    private float _currentAttemptTime;
+    private float currentAttemptTime;
 
     public Vector3 maxBoundary;
 
     private Vector3 boundaryCentre;
 
     public GameObject player;
+
+    public GameEvent outOfBounds;
 
     private void Awake()
     {
@@ -53,22 +55,28 @@ public class GameManager : MonoBehaviour
             data = array[0];
             if(data is float time)
             {
-                _currentAttemptTime = time;
+                currentAttemptTime = time;
             }
         }
-        onAttemptComplete.Announce(this,_currentAttemptTime);
+        onAttemptComplete.Announce(this,currentAttemptTime);
     }
 
 
     public void TrackPlayer()
     {
-        ///create a boundary box using the maxBoundary variable and the player's position. If the player goes outside of the boundary box, restart the level
         
         if(player.transform.position.x > boundaryCentre.x + maxBoundary.x || player.transform.position.x < boundaryCentre.x - maxBoundary.x ||
            player.transform.position.y > boundaryCentre.y + maxBoundary.y || player.transform.position.y < boundaryCentre.y - maxBoundary.y ||
            player.transform.position.z > boundaryCentre.z + maxBoundary.z || player.transform.position.z < boundaryCentre.z - maxBoundary.z)
         {
-            RestartLevel(this, null);
+            outOfBounds.Announce(this, null);
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, maxBoundary * 2);
     }
 }

@@ -65,7 +65,7 @@ public class DockingObjective : MonoBehaviour
         objectiveTimer += Time.deltaTime;
         if(objectiveTimeChanged != null)
             objectiveTimeChanged.Announce(this,objectiveTimer);
-        //Debug.Log("Objective timer: " + objectiveTimer);
+        
     }
 
     public void StopDocking()
@@ -93,8 +93,7 @@ public class DockingObjective : MonoBehaviour
     private IEnumerator EndOfAttempt()
     {
         yield return new WaitForSeconds(timeToWaitAfterCompletion);
-        //show panel now. 
-        //send an event for end of objective. 
+        
         Debug.Log("Announcing docking complete.");
         onDockingComplete.Announce(this, objectiveTimer);
         objectiveTimer = 0;

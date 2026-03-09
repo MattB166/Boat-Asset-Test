@@ -173,7 +173,7 @@ public class PlayerOcean : MonoBehaviour
 
     public Vector3 GetNormal(Vector3 localPos)
     {
-        float delta = 0.01f; // small offset for numerical derivative
+        float delta = 0.01f;
         float hL = GetHeight(localPos - new Vector3(delta, 0, 0));
         float hR = GetHeight(localPos + new Vector3(delta, 0, 0));
         float hD = GetHeight(localPos - new Vector3(0, 0, delta));
