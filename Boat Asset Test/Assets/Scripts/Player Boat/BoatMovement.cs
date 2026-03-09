@@ -201,17 +201,17 @@ public class BoatMovement : MonoBehaviour
             
             float turnTorque = currentRudderAngle * turnStrength * (1f - speed01);
             rb.AddTorque(transform.up * turnTorque, ForceMode.Acceleration);
+
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Boat collided with: " + collision.gameObject.name);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Boat entered trigger with: " + other.gameObject.name);
+        if(collision.collider.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("Boat collided with obstacle.");
+            transform.position = startPos.position;
+        }
     }
 
 }

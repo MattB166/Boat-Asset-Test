@@ -8,10 +8,12 @@ public class IslandDocking : MonoBehaviour
     private Collider _dockingCollider;
     public GameEvent onBoatEntered;
     public GameEvent onBoatExited;
+    private GameObject _dockingZoneIndicator;
 
     // Start is called before the first frame update
     void Start()
     {
+        _dockingZoneIndicator = transform.GetComponentInChildren<EndZonePulse>().gameObject;
         _dockingCollider = GetComponent<Collider>();
         _dockingCollider.isTrigger = true; 
         if (_dockingCollider == null)
@@ -33,6 +35,7 @@ public class IslandDocking : MonoBehaviour
             Debug.Log("Boat entered docking area.");
             if(onBoatEntered != null)
                 onBoatEntered.Announce(this);
+            _dockingZoneIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -42,6 +45,7 @@ public class IslandDocking : MonoBehaviour
             Debug.Log("Boat exited docking area.");
             if(onBoatExited != null)
                 onBoatExited.Announce(this);
+                _dockingZoneIndicator.gameObject.SetActive(true);
         }
     }
 

@@ -150,6 +150,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sunseeker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3889704333670199367, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 10.565288
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 23.902588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.01878786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.55490446
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138716241847265204, guid: bd477b1a3300609478d6b10102d1b8fa,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7058510327098125795, guid: bd477b1a3300609478d6b10102d1b8fa,
         type: 3}
       propertyPath: m_RootOrder
